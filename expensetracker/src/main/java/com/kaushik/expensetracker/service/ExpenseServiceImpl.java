@@ -8,11 +8,13 @@ import com.kaushik.expensetracker.entity.Expense;
 import com.kaushik.expensetracker.mapper.ExpenseMapper;
 import com.kaushik.expensetracker.repository.ExpenseRepository;
 import com.kaushik.expensetracker.repository.UserRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ExpenseServiceImpl implements ExpenseService {
 
@@ -29,10 +31,14 @@ public class ExpenseServiceImpl implements ExpenseService {
         return expenseMapper.toResponse(savedExpense);
     }
 
+    @Override
+    @Transactional(readOnly = true)
     public List<ExpenseResponse> getAllExpenses() {
         return expenseRepository.findAll().stream().map(expenseMapper::toResponse).toList();
     }
 
+    @Override
+    @Transactional(readOnly = true)
     public ExpenseResponse getExpenseById(Long id) {
         Expense expense = expenseRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Expense not found with id: " + id));
@@ -41,6 +47,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
+    @Transactional
     public ExpenseResponse updateExpense(Long id, ExpenseRequest request) {
 
         Expense expense = expenseRepository.findById(id)
@@ -58,6 +65,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
+    @Transactional
     public void deleteExpense(Long id) {
 
         Expense expense = expenseRepository.findById(id)
