@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.kaushik.expensetracker.dto.ExpenseRequest;
 import com.kaushik.expensetracker.dto.ExpenseResponse;
+import com.kaushik.expensetracker.entity.Expense;
 import com.kaushik.expensetracker.mapper.ExpenseMapper;
 import com.kaushik.expensetracker.repository.ExpenseRepository;
 import com.kaushik.expensetracker.repository.UserRepository;
@@ -20,7 +21,11 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public ExpenseResponse createExpense(ExpenseRequest request) {
-        return null;
+
+        Expense expense = expenseMapper.toEntity(request);
+        Expense savedExpense = expenseRepository.save(expense);
+
+        return expenseMapper.toResponse(savedExpense);
     }
 
 }

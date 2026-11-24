@@ -11,6 +11,10 @@ public class ExpenseMapper {
 
     public Expense toEntity(ExpenseRequest request) {
 
+        if (request == null) {
+            return null;
+        }
+
         Expense expense = new Expense();
 
         expense.setAmount(request.getAmount());
@@ -23,12 +27,17 @@ public class ExpenseMapper {
 
     public ExpenseResponse toResponse(Expense expense) {
 
+        if (expense == null) {
+            return null;
+        }
+
         ExpenseResponse response = new ExpenseResponse();
 
         response.setId(expense.getId());
         response.setAmount(expense.getAmount());
         response.setCategory(expense.getCategory());
         response.setExpenseDate(expense.getExpenseDate());
+        response.setDescription(expense.getDescription());
 
         return response;
     }
