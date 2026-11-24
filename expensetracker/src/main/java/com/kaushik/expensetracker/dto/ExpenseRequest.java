@@ -24,7 +24,7 @@ public class ExpenseRequest {
     @NotBlank
     private String category;
     private String description;
-    @NotBlank
+    @NotNull
     private LocalDate expenseDate;
 
 }

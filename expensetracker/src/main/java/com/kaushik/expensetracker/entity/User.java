@@ -24,6 +24,6 @@ public class User {
     private String email;
     private String password;
     private String contactNumber;
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
     private LocalDateTime lastLoggedIn;
 }

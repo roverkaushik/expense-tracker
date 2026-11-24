@@ -1,5 +1,6 @@
 package com.kaushik.expensetracker.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
@@ -22,7 +23,6 @@ public class UserRequest {
     private String lastName;
     @NotNull
     private String email;
-    @NotNull
-    @Positive
+    @NotBlank
     private LocalDate contactNumber;
 }
