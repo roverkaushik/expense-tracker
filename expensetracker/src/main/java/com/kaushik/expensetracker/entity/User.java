@@ -5,7 +5,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 @Entity
-@Table(name="user")
+@Table(name="users")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,12 +14,16 @@ import java.time.LocalDateTime;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
+    @Column(nullable = false)
     private String firstName;
+    @Column(nullable = false)
     private String lastName;
+    @Column(nullable = false, unique = true)
     private String email;
+    private String password;
     private String contactNumber;
-    private LocalDateTime firstLoggedIn;
+    private LocalDateTime createAt;
     private LocalDateTime lastLoggedIn;
 }
